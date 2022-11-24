@@ -1,7 +1,9 @@
 import Input from "../components/atoms/inputs";
 import Button from "../components/atoms/button";
+import { useSelector } from "react-redux";
 
 export default function Settings() {
+  const { userInfo } = useSelector((s) => s.user);
   return (
     <main>
       <section className="pt-[200px] h-screen relative">
@@ -36,12 +38,12 @@ export default function Settings() {
           <h1 className="font-extrabold text-[32px]">Nouvelle adresse mail</h1>
           <div className="flex flex-col gap-[12px]">
             <Input
-              placeholder="jean@mail.com"
+              placeholder={userInfo.email}
               type="mail"
               label="Adresse mail"
             />
             <Input
-              placeholder="jean@mail.com"
+              placeholder={userInfo.email}
               type="mail"
               label="Confirmez l'adresse"
             />

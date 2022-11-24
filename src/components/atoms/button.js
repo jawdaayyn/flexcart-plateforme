@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function button({ label, full }) {
+export default function button({ label, full, handleSubmit }) {
   return (
     <button
       className={`${
@@ -8,6 +8,7 @@ export default function button({ label, full }) {
           ? " text-white  bg-black"
           : " text-black  bg-white border-2 border-black "
       } px-[24px] py-[4px] rounded-xl font-extrabold hover:px-[36px] duration-200 uppercase`}
+      onClick={handleSubmit}
     >
       {label}
     </button>
