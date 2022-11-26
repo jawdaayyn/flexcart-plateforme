@@ -6,9 +6,12 @@ import settingsFill from "@iconify/icons-eva/settings-fill";
 import logoutIcon from "@iconify/icons-mdi/logout";
 import pelican from "../../assets/pelican100.png";
 
+//RTK
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/auth/userSlice";
 export default function Navbar() {
- const { userInfo } = useSelector((s) => s.user);
   const dispatch = useDispatch();
+
   return (
     <div className=" z-50 bg-lightGrey text-grey shadow-lg h-screen fixed  duration-300  left-0 top-0 flex flex-col w-[250px] items-start justify-start py-[48px] px-[24px]">
       <div className="flex items-center gap-[12px] mb-[48px]">
@@ -42,13 +45,20 @@ export default function Navbar() {
         </div>
       </div>
       <div className="">
-        <a href="/login">
+        <a
+          href="/"
+          onClick={() => {
+            dispatch(logout());
+            window.location.reload(true);
+          }}
+        >
           <div className="flex items-center gap-[4px] hover:text-red hover:gap-[6px] duration-150 cursor-pointer">
             <Icon icon={logoutIcon} className="rotate-180" />
             <h2>Déconnexion</h2>
           </div>
         </a>
       </div>
+      <div></div>
     </div>
   );
 }

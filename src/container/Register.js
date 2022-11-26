@@ -33,7 +33,13 @@ export default function Login() {
     <section className="flex items-center justify-center w-screen h-screen m-0 text-black gap-[128px]">
       <div className="gap-[24px] px-[48px] py-[24px] h-screen shadow-lg bg-white flex flex-col items-start justify-center">
         <h1 className="font-extrabold text-[32px]">Création de mon compte</h1>
-        <Input placeholder="jean@mail.com" type="mail" label="Votre e-mail" required onChange={(e) => setEmail(e.target.value)} />
+        <Input
+          placeholder="jean@mail.com"
+          type="mail"
+          label="Votre e-mail"
+          required
+          onChange={(e) => setEmail(e.target.value)}
+        />
         <Input
           placeholder="* * * * * * * *"
           type="password"
@@ -45,7 +51,7 @@ export default function Login() {
           placeholder="* * * * * * * *"
           type="password"
           label="Confirmez le mot de passe"
-          required   
+          required
         />
         <div className=" flex items-center justify-center gap-[12px] mb-[8px]">
           <a href="/login">
@@ -54,7 +60,8 @@ export default function Login() {
             </h2>
           </a>
         </div>
-        <Button label="suivant" full={true} />
+        <Button label="suivant" full={true} handleSubmit={() => submitForm()} />
+        <span className="text-red">{error}</span>
       </div>
       <div className="flex flex-col items-center text-white">
         <img
