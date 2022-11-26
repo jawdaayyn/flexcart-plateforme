@@ -9,6 +9,7 @@ export default function ProductCard(data) {
   const { name, brand, price, description } = data;
   const [active, setActive] = useState(false);
   const [hover, setHover] = useState(false);
+
   return (
     <div
       className="flex col-span-12 gap-[8px] text-black duration-300 bg-transparent"
@@ -72,7 +73,7 @@ export default function ProductCard(data) {
             <Button
               label={active ? "Moins" : "Plus"}
               full={active ? false : true}
-              onClick={() => {
+              handleSubmit={() => {
                 setActive(!active);
               }}
             />
