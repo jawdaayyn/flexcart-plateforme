@@ -1,12 +1,12 @@
 import React from "react";
 import Button from "../atoms/button";
 
-export default function Tools() {
+export default function Tools({email}) {
   return (
     <section className="text-white">
       <div className="col-span-12">
         <h1 className="text-[40px] font-extrabold text-gray-700 ">
-          Bonjour [userName]
+          Bonjour {email}
         </h1>
         <p>Retrouvez juste ici tous vos produits</p>
       </div>

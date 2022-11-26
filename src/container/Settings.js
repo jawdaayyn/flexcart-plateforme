@@ -1,9 +1,11 @@
 import Input from "../components/atoms/inputs";
 import Button from "../components/atoms/button";
+import { useSelector } from "react-redux";
 
 import Navbar from "../components/shared/Navbar";
 
 export default function Settings() {
+  const { userInfo } = useSelector((s) => s.user);
   return (
     <main>
       <Navbar />
@@ -45,12 +47,12 @@ export default function Settings() {
           <br />
           <div className="flex flex-col gap-[12px]">
             <Input
-              placeholder="jean@mail.com"
+              placeholder={userInfo.email}
               type="mail"
               label="Adresse mail"
             />
             <Input
-              placeholder="jean@mail.com"
+              placeholder={userInfo.email}
               type="mail"
               label="Confirmez l'adresse"
             />

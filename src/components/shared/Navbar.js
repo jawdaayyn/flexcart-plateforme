@@ -7,6 +7,8 @@ import logoutIcon from "@iconify/icons-mdi/logout";
 import pelican from "../../assets/pelican100.png";
 
 export default function Navbar() {
+ const { userInfo } = useSelector((s) => s.user);
+  const dispatch = useDispatch();
   return (
     <div className=" z-50 bg-lightGrey text-grey shadow-lg h-screen fixed  duration-300  left-0 top-0 flex flex-col w-[250px] items-start justify-start py-[48px] px-[24px]">
       <div className="flex items-center gap-[12px] mb-[48px]">
