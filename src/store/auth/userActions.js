@@ -22,7 +22,6 @@ export const userLogin = createAsyncThunk(
       );
 
       // store user's token in local storage
-      console.log(data);
       localStorage.setItem("userToken", data.message);
       return data;
     } catch (error) {
@@ -105,6 +104,11 @@ export const userApi = createApi({
         headers: {
           Authorization: `Bearer ${params.token}`,
         },
+      }),
+    }),
+    getDetails: builder.query({
+      query: (params) => ({
+        url: `/users/${params.uid}`,
       }),
     }),
   }),

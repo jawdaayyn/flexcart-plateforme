@@ -5,11 +5,10 @@ import binCircle from "@iconify/icons-mdi/bin-circle";
 
 import Button from "../atoms/button";
 
-export default function ProductCard(data) {
-  const { name, brand, price, description } = data;
+export default function ProductCard(product) {
   const [active, setActive] = useState(false);
   const [hover, setHover] = useState(false);
-
+  const { name, url, description, brand, price, image } = product.product;
   return (
     <div
       className="flex col-span-12 gap-[8px] text-black duration-300 bg-transparent"
@@ -37,13 +36,13 @@ export default function ProductCard(data) {
             active ? "h-full w-[500px]" : "h-full w-[300px]"
           } bg-lightGrey  rounded-lg flex items-center justify-center duration-150`}
         >
-          image
+          <img src={image} alt="Product's image" />
         </div>
         <div className="flex flex-col justify-between w-full h-full">
           <div className="flex justify-between w-full h-full pr-[48px]">
             <div className="flex flex-col justify-start gap-[16px] pb-[24px]">
-              <h1 className="font-extrabold text-[32px]">NomProduit</h1>
-              <h1 className="font-bold ">Adidas</h1>
+              <h1 className="font-extrabold text-[32px]">{name}</h1>
+              <h1 className="font-bold ">{brand}</h1>
               <h1 className="font-bold text-[#cccccc]">
                 ajouté le 12 oct 2022
               </h1>
@@ -52,20 +51,12 @@ export default function ProductCard(data) {
                   active ? "block" : "hidden"
                 } cursor-pointer hover:underline`}
               >
-                https://www.glami.ro/nike/?thp=g&gclid=Cj0KCQiA4OybBhCzARIsAI...
+                {url}
               </p>
-              <p className={active ? "block" : "hidden"}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum,
-                voluptatum odio reprehenderit possimus pariatur soluta nihil
-                vero, incidunt expedita aspernatur perspiciatis inventore
-                laborum consectetur rem quis nemo sed? Aliquam, adipisci nobis
-                nulla vel facilis qui aspernatur quod! Totam, reprehenderit. Sed
-                modi officiis expedita maxime, animi pariatur magnam ex quisquam
-                eos.
-              </p>
+              <p className={active ? "block" : "hidden"}>{description}</p>
             </div>
             <div className="flex items-start h-full">
-              <h1 className="font-bold text-[24px]">120€</h1>
+              <h1 className="font-bold text-[24px]">{price}</h1>
             </div>
           </div>
           <div className="flex gap-[8px] w-[200px]">

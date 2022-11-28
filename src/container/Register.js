@@ -8,27 +8,41 @@ import bussiness from "../assets/bussiness.svg";
 import { useState } from "react";
 // RTK
 import { userApi } from "../store/auth/userActions";
-
+import { userLogin } from "../store/auth/userActions";
+import { useDispatch, useSelector } from "react-redux";
 export default function Login() {
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.user);
+
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [error, setError] = useState(null);
-
+  let formState = {
+    email: email,
+    password: password,
+  };
   const [registerAccount] = userApi.endpoints.registerAccount.useMutation();
 
   const submitForm = async () => {
-    console.log(email, password);
-
-    try {
-      await registerAccount({
-        email: email,
-        password: password,
+    await registerAccount({
+      email: email,
+      password: password,
+    })
+      .then(() => {
+        dispatch(userLogin(formState));
+      })
+      .catch((error) => {
+        setError(error);
       });
-    } catch (error) {
-      setError(error);
-      console.log(error);
-    }
   };
+
+  setTimeout(() => {
+    if (userInfo) {
+      window.location.reload(true);
+    } else {
+      return;
+    }
+  });
   return (
     <section className="flex items-center justify-center w-screen h-screen m-0 text-black gap-[128px]">
       <div className="gap-[24px] px-[48px] py-[24px] h-screen shadow-lg bg-white flex flex-col items-start justify-center">
