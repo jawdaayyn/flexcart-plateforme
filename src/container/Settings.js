@@ -1,8 +1,8 @@
 import Input from "../components/atoms/inputs";
 import Button from "../components/atoms/button";
-import { useSelector } from "react-redux";
 
 import Navbar from "../components/shared/Navbar";
+import { useSelector } from "react-redux";
 
 export default function Settings() {
   const { userInfo } = useSelector((s) => s.user);
