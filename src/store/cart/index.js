@@ -13,5 +13,11 @@ export const cartApi = createApi({
         url: `/carts/${params.id}`,
       }),
     }),
+    deleteItem: builder.mutation({
+      query: (params) => ({
+        url: `/carts/${params.id}/${params.itemid}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });

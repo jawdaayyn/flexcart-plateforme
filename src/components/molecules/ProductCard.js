@@ -4,11 +4,26 @@ import { Icon } from "@iconify/react";
 import binCircle from "@iconify/icons-mdi/bin-circle";
 
 import Button from "../atoms/button";
-
+import { cartApi } from "../../store/cart";
+import { useNavigate } from "react-router-dom";
 export default function ProductCard(product) {
+  const navigate = useNavigate();
+  const [deleteItem] = cartApi.endpoints.deleteItem.useMutation();
   const [active, setActive] = useState(false);
   const [hover, setHover] = useState(false);
-  const { name, url, description, brand, price, image } = product.product;
+  const { name, url, description, brand, price, image, itemid } =
+    product.product;
+  const { cartId } = product;
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    deleteItem({
+      id: cartId,
+      itemid: itemid,
+    })
+      .unwrap()
+      .catch((error) => console.log(error));
+    navigate("/");
+  };
   return (
     <div
       className="flex col-span-12 gap-[8px] text-black duration-300 bg-transparent"
@@ -29,7 +44,11 @@ export default function ProductCard(product) {
             hover && active ? "block" : "hidden"
           } hover:text-red text-blue hover:rotate-[10deg] absolute right-[24px] bottom-[24px] shadow-lg rounded-2xl w-[36px]  h-[36px] duration-150 hover:scale-125 cursor-pointer hover:font-extrabold`}
         >
-          <Icon icon={binCircle} className="w-full h-full" />
+          <Icon
+            onClick={(e) => handleDelete(e)}
+            icon={binCircle}
+            className="w-full h-full"
+          />
         </div>
         <div
           className={`${

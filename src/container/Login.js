@@ -5,13 +5,14 @@ import Input from "../components/atoms/inputs";
 import Button from "../components/atoms/button";
 import forest from "../assets/forest.svg";
 // Hooks
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // RTK
 import { userLogin } from "../store/auth/userActions";
-
+import { useNavigate } from "react-router-dom";
 export default function Login() {
-  const { userInfo } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const { userInfo, loading, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState(null);
@@ -24,19 +25,23 @@ export default function Login() {
   const handleSubmit = async () => {
     dispatch(userLogin(formState));
   };
-  setTimeout(() => {
+  useEffect(() => {
     if (userInfo) {
-      window.location.reload(true);
-    } else {
-      return;
+      navigate("/user-profile");
     }
-  });
+  }, [navigate, userInfo]);
+
   return (
     <section className="flex items-center justify-center w-screen h-screen m-0 text-black gap-[128px]">
       <div className="gap-[24px] px-[48px] py-[24px] shadow-lg bg-white flex flex-col items-start justify-center h-screen">
         <h1 className="font-extrabold text-[32px]">S'identifier</h1>
-        <Input placeholder="jean@mail.com" type="mail" label="Votre e-mail" required onChange={(e) => setEmail(e.target.value)}
-      />
+        <Input
+          placeholder="jean@mail.com"
+          type="mail"
+          label="Votre e-mail"
+          required
+          onChange={(e) => setEmail(e.target.value)}
+        />
         <Input
           placeholder="* * * * * * * *"
           type="password"
@@ -54,7 +59,13 @@ export default function Login() {
             </h2>
           </a>
         </div>
-        <Button label="suivant" full={true} handleSubmit={() => handleSubmit()}/>
+        <Button
+          disabled={loading}
+          label="suivant"
+          full={true}
+          handleSubmit={() => handleSubmit()}
+        />
+        {error && <div className="text-red text-center">{error}</div>}
       </div>
       <div className="flex flex-col items-center text-white">
         <img

@@ -12,7 +12,7 @@ function App() {
     <main className="h-screen pt-[50px] bg-darkBlue text-black">
       <Navbar />
       <Tools email={userInfo.email} />
-      <Cart uid={userInfo.user_id} />
+      <Cart />
     </main>
   );
 }

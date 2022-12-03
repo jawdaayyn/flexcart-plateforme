@@ -3,7 +3,7 @@ import ProductCard from "../molecules/ProductCard";
 import { cartApi } from "../../store/cart/index";
 import { userApi } from "../../store/auth/userActions";
 import { useSelector } from "react-redux";
-export default function Cart(uid) {
+export default function Cart() {
   const { userInfo } = useSelector((state) => state.user);
   const { data: user } = userApi.endpoints.getDetails.useQuery({
     uid: userInfo?.user_id,
@@ -12,56 +12,14 @@ export default function Cart(uid) {
     id: user?.cartId,
   });
   if (cart?.content <= 0) {
-    return;
+    console.log("no carts");
   } else {
     return (
       <section className="bg-lightGrey rounded-t-2xl px-[32px] py-[32px] overflow-scroll">
         {cart?.content?.map((product) => {
-          return <ProductCard product={product} />;
+          return <ProductCard product={product} cartId={user?.cartId} />;
         })}
       </section>
     );
   }
 }
-
-/*
-
-  
-  const products = [
-    {
-      name: "Chaussures",
-      brand: "Nike",
-      price: "120€",
-      url: "https://www.glami.ro/nike/?thp=g&gclid=Cj0KCQiA4OybBhCzARIsAI",
-    },
-    {
-      name: "chaussures",
-      brand: "nike",
-      price: "120€",
-      url: "https://www.glami.ro/nike/?thp=g&gclid=Cj0KCQiA4OybBhCzARIsAI",
-    },
-    {
-      name: "chaussures",
-      brand: "nike",
-      price: "120€",
-      url: "https://www.glami.ro/nike/?thp=g&gclid=Cj0KCQiA4OybBhCzARIsAI",
-    },
-    {
-      name: "chaussures",
-      brand: "nike",
-      price: "120€",
-      url: "https://www.glami.ro/nike/?thp=g&gclid=Cj0KCQiA4OybBhCzARIsAI",
-    },
-    {
-      name: "chaussures",
-      brand: "nike",
-      price: "120€",
-      url: "https://www.glami.ro/nike/?thp=g&gclid=Cj0KCQiA4OybBhCzARIsAI",
-    },
-  ];
-  return (
- {products.map((product) => {
-        return <ProductCard data={product} />;
-      })}
-      )
-*/
